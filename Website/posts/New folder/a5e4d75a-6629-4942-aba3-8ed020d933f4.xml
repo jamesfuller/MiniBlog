@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <post>
-  <title>Test 1</title>
-  <slug>test-1</slug>
+  <title>Test 5</title>
+  <slug>test-5</slug>
   <author></author>
-  <pubDate>2014-06-02 09:58:00</pubDate>
-  <lastModified>2014-06-02 09:58:21</lastModified>
+  <pubDate>2014-06-05 09:58:00</pubDate>
+  <lastModified>2014-06-05 09:58:21</lastModified>
   <excerpt>this is a test</excerpt>
   <content>&lt;p&gt;Testing the excerpt from WLW&lt;/p&gt;</content>
   <ispublished>true</ispublished>
