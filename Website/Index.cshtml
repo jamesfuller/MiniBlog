@@ -4,6 +4,11 @@
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     DateTime lastModified = DateTime.MinValue;
 
+
+    if (Blog.CurrentSlug.Contains("jpg") || Blog.CurrentSlug.Contains("png"))
+    {
+        return;
+    }
     if (string.IsNullOrEmpty(Blog.CurrentSlug))
     {
         Page.ShowPaging = true;
@@ -35,17 +40,17 @@
         if (post == null) { throw new HttpException(404, "Post not found"); }
 
         Page.Title = post.Title;
-		Page.Description = post.Excerpt;
+        Page.Description = post.Excerpt;
         lastModified = post.LastModified;
 
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/" + post.ID + ".xml")));
 
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
-	
-	@AntiForgery.GetHtml()
 
-    if ( !Request.IsLocal && !User.Identity.IsAuthenticated )
+    @AntiForgery.GetHtml()
+
+    if (!Request.IsLocal && !User.Identity.IsAuthenticated)
     {
         Response.Cache.AppendCacheExtension("max-age=0");
         Response.Cache.SetValidUntilExpires(true);
@@ -57,7 +62,7 @@
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/themes/" + Blog.Theme)));
 
-        
+
         Blog.SetConditionalGetHeaders(lastModified.ToLocalTime(), Context);
     }
 }
