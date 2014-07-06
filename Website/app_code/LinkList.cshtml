@@ -1,0 +1,34 @@
+﻿@helper LinkListDisplay(string[] list) {
+    // your helper can contain code and/or markup, e.g.
+    // var msg = "Hello " + name;
+    // <p>@msg</p>
+    // For more information, visit http://go.microsoft.com/fwlink/?LinkID=204658
+
+    if (list.Length > 0)
+    {
+        <i class="icon-tags"></i>    
+        var j = string.Join(", ", list.ToList<string>().Select(x => SingleLink(x)));
+        
+        
+        @Html.Raw(j)
+        
+       // if (Genre == null || !Genre.Any())
+       // {
+       //     return string.Empty;
+       // }
+
+       //string.Join(", ", Genre.Select(x => MakeLinkHelper(
+       //     "/people"
+       //     , new NameValueCollection { { "genre", x.ItemName } }
+       //     , x.Genre
+       //     ))
+       // );
+    
+    }
+}
+
+
+@helper SingleLink(string s)
+{
+    <a href="~/category/@HttpUtility.UrlEncode(s.ToLowerInvariant())">@s</a>
+}
