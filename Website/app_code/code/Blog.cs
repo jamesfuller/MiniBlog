@@ -162,6 +162,21 @@ public static class Blog
         return VirtualPathUtility.ToAbsolute(relative);
     }
 
+
+    public static string GetPagingUrl2(int pageNumber)
+    {
+        string url = "/page/{0}/";
+        string category = HttpContext.Current.Request.QueryString["category"];
+
+        if (!string.IsNullOrEmpty(category))
+        {
+            url = "/category/" + HttpUtility.UrlEncode(category.ToLowerInvariant()) + "/" + url;
+        }
+
+        string relative = string.Format("~" + url, pageNumber);
+        return VirtualPathUtility.ToAbsolute(relative);
+    }
+
     public static string FingerPrint(string rootRelativePath, string cdnPath = "")
     {
         if (HttpContext.Current.Request.IsLocal)

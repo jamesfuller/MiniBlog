@@ -137,8 +137,6 @@
             </div>
 
         </div><!-- End Header -->
- 
-
         <!-- Blog Content
         ================================================== -->
         <div class="row">
@@ -147,91 +145,43 @@
 
                 @if (Page.ShowPaging != null)
                 {
-
-
                     <div class="pagination">
-
-
-                        @*<ul>
-                        <li class="active"><a href="#">Prev</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>*@
-
-
                         <ul>
-
-                            @if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
-                            {
-                                <li class="previous"><a href="@Blog.GetPagingUrl(1)" rel="prev">&larr; Older</a></li>
-                            }
 
                             @if (Blog.CurrentPage > 1)
                             {
-                                <li class="next"><a href="@Blog.GetPagingUrl(-1)" rel="next">Newer &rarr;</a></li>
+                                <li class="previous"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage - 1)" rel="prev">&larr; Newer</a></li>
                             }
+
+                            @{
+                            var a = (double)Blog.GetPosts().Count() / (double)Blog.PostsPerPage;
+                            int numPages = (int)Math.Floor(a);
+
+                            string activeClass = string.Empty;
+
+                            }
+
+
+                            @for (int i = 1; i <= numPages; i++)
+                            {
+                                if (i == Storage.GetAllPosts().IndexOf(Blog.CurrentPost) + 1)
+                                {
+                                    activeClass = "class=\"active\"";
+                                }
+
+                                <li @activeClass><a href="@Blog.GetPagingUrl2(i)">@i</a></li>
+                            }
+@if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
+{ 
+                            <li class="next"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage + 1)" rel="next">Older &rarr;</a></li>
+}
+
                         </ul>
+
+
+
                     </div>
                 }
-
-                <!-- Blog Posts
-        ================================================== -->
-                <!-- Blog Post 1 -->
-                <article>
-                    <h3 class="title-bg"><a href="blog-single.htm">A subject that is beautiful in itself</a></h3>
-                    <div class="post-summary">
-                        <a href="blog-single.htm"><img src="img/gallery/post-img-1.jpg" alt="Post Thumb"></a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. Vivamus tincidunt sem eu magna varius elementum. Maecenas felis tellus, fermentum vitae laoreet vitae, volutpat et urna. Nulla faucibus ligula eget ante varius ac euismod odio placerat. Nam sit amet felis non lorem faucibus rhoncus vitae id dui.</p>
-                        <div class="post-summary-footer">
-                            <button class="btn btn-small btn-inverse" type="button">Read more</button>
-                            <ul class="post-data">
-                                <li><i class="icon-calendar"></i> 09/04/15</li>
-                                <li><i class="icon-user"></i> <a href="#">Admin</a></li>
-                                <li><i class="icon-comment"></i> <a href="#">5 Comments</a></li>
-                                <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a>, <a href="#">illustration</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article>
-                    <h3 class="title-bg"><a href="blog-single.htm">A great artist is always before his time</a></h3>
-                    <div class="post-summary">
-                        <a href="blog-single.htm"><img src="img/gallery/post-img-1.jpg" alt="Post Thumb"></a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. Vivamus tincidunt sem eu magna varius elementum. Maecenas felis tellus, fermentum vitae laoreet vitae, volutpat et urna. Nulla faucibus ligula eget ante varius ac euismod odio placerat. Nam sit amet felis non lorem faucibus rhoncus vitae id dui.</p>
-                        <div class="post-summary-footer">
-                            <button class="btn btn-small btn-inverse" type="button">Read more</button>
-                            <ul class="post-data">
-                                <li><i class="icon-calendar"></i> 09/04/15</li>
-                                <li><i class="icon-user"></i> <a href="#">Admin</a></li>
-                                <li><i class="icon-comment"></i> <a href="#">5 Comments</a></li>
-                                <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a>, <a href="#">illustration</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article>
-                    <h3 class="title-bg"><a href="blog-single.htm">Is art everything to anybody?</a></h3>
-                    <div class="post-summary">
-                        <a href="blog-single.htm"><img src="img/gallery/post-img-1.jpg" alt="Post Thumb"></a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. Vivamus tincidunt sem eu magna varius elementum. Maecenas felis tellus, fermentum vitae laoreet vitae, volutpat et urna. Nulla faucibus ligula eget ante varius ac euismod odio placerat. Nam sit amet felis non lorem faucibus rhoncus vitae id dui.</p>
-                        <div class="post-summary-footer">
-                            <button class="btn btn-small btn-inverse" type="button">Read more</button>
-                            <ul class="post-data">
-                                <li><i class="icon-calendar"></i> 09/04/15</li>
-                                <li><i class="icon-user"></i> <a href="#">Admin</a></li>
-                                <li><i class="icon-comment"></i> <a href="#">5 Comments</a></li>
-                                <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a>, <a href="#">illustration</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
 
 
             </div>
@@ -280,7 +230,7 @@
                             </li>
                         </ul>
                     </section>
-                                    </div>
+                </div>
             </aside>
         </div>
 
@@ -291,59 +241,60 @@
         <div class="footer-container">
             <!-- Begin Footer -->
             <div class="container">
-               <div class="row footer-row">@*
-    <div class="span3 footer-col">
-        <h5>About Us</h5>
-        <img src="img/piccolo-footer-logo.png" alt="Piccolo" /><br /><br />
-        <address>
-            <strong>Design Team</strong><br />
-            123 Main St, Suite 500<br />
-            New York, NY 12345<br />
-        </address>
-        <ul class="social-icons">
-            <li><a href="#" class="social-icon facebook"></a></li>
-            <li><a href="#" class="social-icon twitter"></a></li>
-            <li><a href="#" class="social-icon dribble"></a></li>
-            <li><a href="#" class="social-icon rss"></a></li>
-            <li><a href="#" class="social-icon forrst"></a></li>
-        </ul>
-    </div>
-    <div class="span3 footer-col">
-        <h5>Latest Tweets</h5>
-        <ul>
-            <li><a href="#">@@room122</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-            <li><a href="#">@@room122</a> In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Morbi blandit ultricies ultrices.</li>
-            <li><a href="#">@@room122</a> Vivamus nec lectus sed orci molestie molestie. Etiam mattis neque eu orci rutrum aliquam.</li>
-        </ul>
-    </div>
-    <div class="span3 footer-col">
-        <h5>Latest Posts</h5>
-        <ul class="post-list">
-            <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-            <li><a href="#">Consectetur adipiscing elit est lacus gravida</a></li>
-            <li><a href="#">Lectus sed orci molestie molestie etiam</a></li>
-            <li><a href="#">Mattis consectetur adipiscing elit est lacus</a></li>
-            <li><a href="#">Cras rutrum, massa non blandit convallis est</a></li>
-        </ul>
-    </div>
-    <div class="span3 footer-col">
-        <h5>Flickr Photos</h5>
-        <ul class="img-feed">
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-            <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-        </ul>
-    </div>*@
-    </div>
+                <div class="row footer-row">
+                    @*
+                        <div class="span3 footer-col">
+                            <h5>About Us</h5>
+                            <img src="img/piccolo-footer-logo.png" alt="Piccolo" /><br /><br />
+                            <address>
+                                <strong>Design Team</strong><br />
+                                123 Main St, Suite 500<br />
+                                New York, NY 12345<br />
+                            </address>
+                            <ul class="social-icons">
+                                <li><a href="#" class="social-icon facebook"></a></li>
+                                <li><a href="#" class="social-icon twitter"></a></li>
+                                <li><a href="#" class="social-icon dribble"></a></li>
+                                <li><a href="#" class="social-icon rss"></a></li>
+                                <li><a href="#" class="social-icon forrst"></a></li>
+                            </ul>
+                        </div>
+                        <div class="span3 footer-col">
+                            <h5>Latest Tweets</h5>
+                            <ul>
+                                <li><a href="#">@@room122</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li><a href="#">@@room122</a> In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Morbi blandit ultricies ultrices.</li>
+                                <li><a href="#">@@room122</a> Vivamus nec lectus sed orci molestie molestie. Etiam mattis neque eu orci rutrum aliquam.</li>
+                            </ul>
+                        </div>
+                        <div class="span3 footer-col">
+                            <h5>Latest Posts</h5>
+                            <ul class="post-list">
+                                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                                <li><a href="#">Consectetur adipiscing elit est lacus gravida</a></li>
+                                <li><a href="#">Lectus sed orci molestie molestie etiam</a></li>
+                                <li><a href="#">Mattis consectetur adipiscing elit est lacus</a></li>
+                                <li><a href="#">Cras rutrum, massa non blandit convallis est</a></li>
+                            </ul>
+                        </div>
+                        <div class="span3 footer-col">
+                            <h5>Flickr Photos</h5>
+                            <ul class="img-feed">
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                            </ul>
+                        </div>*@
+                </div>
 
                 <div class="row">
                     <!-- Begin Sub Footer -->
@@ -374,7 +325,7 @@
                     </div>
                     <!-- End Sub Footer -->
                 </div>
-                
+
 
             </div>
         </div><!-- End Footer -->
