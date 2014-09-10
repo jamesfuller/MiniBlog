@@ -48,7 +48,7 @@
             <!-- Logo
             ================================================== -->
             <div class="span5 logo">
-                <a href="index.htm"><img src="img/piccolo-logo.png" alt="" /></a>
+                @*<a href="index.htm"><img src="img/piccolo-logo.png" alt="" /></a>*@
                 <h5>@Blog.Title - @Blog.Description</h5>
             </div>
 
@@ -101,139 +101,141 @@
 
                 </div>
 
-                <!-- Mobile Nav
-                ================================================== -->
-                <form action="#" id="mobile-nav" class="visible-phone">
-                    <div class="mobile-nav-select">
-                        <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
-                            <option value="">Navigate...</option>
-                            <option value="index.htm">Home</option>
-                            <option value="index.htm">- Full Page</option>
-                            <option value="index-gallery.htm">- Gallery Only</option>
-                            <option value="index-slider.htm">- Slider Only</option>
-                            <option value="features.htm">Features</option>
-                            <option value="page-full-width.htm">Pages</option>
-                            <option value="page-full-width.htm">- Full Width</option>
-                            <option value="page-right-sidebar.htm">- Right Sidebar</option>
-                            <option value="page-left-sidebar.htm">- Left Sidebar</option>
-                            <option value="page-double-sidebar.htm">- Double Sidebar</option>
-                            <option value="gallery-4col.htm">Gallery</option>
-                            <option value="gallery-3col.htm">- 3 Column</option>
-                            <option value="gallery-4col.htm">- 4 Column</option>
-                            <option value="gallery-6col.htm">- 6 Column</option>
-                            <option value="gallery-4col-circle.htm">- Gallery 4 Col Round</option>
-                            <option value="gallery-single.htm">- Gallery Single</option>
-                            <option value="blog-style1.htm">Blog</option>
-                            <option value="blog-style1.htm">- Blog Style 1</option>
-                            <option value="blog-style2.htm">- Blog Style 2</option>
-                            <option value="blog-style3.htm">- Blog Style 3</option>
-                            <option value="blog-style4.htm">- Blog Style 4</option>
-                            <option value="blog-single.htm">- Blog Single</option>
-                            <option value="page-contact.htm">Contact</option>
-                        </select>
-                    </div>
-                </form>
+                @*Mobile Nav
+                        ==================================================
+                        <form action="#" id="mobile-nav" class="visible-phone">
+                            <div class="mobile-nav-select">
+                                <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+                                    <option value="">Navigate...</option>
+                                    <option value="index.htm">Home</option>
+                                    <option value="index.htm">- Full Page</option>
+                                    <option value="index-gallery.htm">- Gallery Only</option>
+                                    <option value="index-slider.htm">- Slider Only</option>
+                                    <option value="features.htm">Features</option>
+                                    <option value="page-full-width.htm">Pages</option>
+                                    <option value="page-full-width.htm">- Full Width</option>
+                                    <option value="page-right-sidebar.htm">- Right Sidebar</option>
+                                    <option value="page-left-sidebar.htm">- Left Sidebar</option>
+                                    <option value="page-double-sidebar.htm">- Double Sidebar</option>
+                                    <option value="gallery-4col.htm">Gallery</option>
+                                    <option value="gallery-3col.htm">- 3 Column</option>
+                                    <option value="gallery-4col.htm">- 4 Column</option>
+                                    <option value="gallery-6col.htm">- 6 Column</option>
+                                    <option value="gallery-4col-circle.htm">- Gallery 4 Col Round</option>
+                                    <option value="gallery-single.htm">- Gallery Single</option>
+                                    <option value="blog-style1.htm">Blog</option>
+                                    <option value="blog-style1.htm">- Blog Style 1</option>
+                                    <option value="blog-style2.htm">- Blog Style 2</option>
+                                    <option value="blog-style3.htm">- Blog Style 3</option>
+                                    <option value="blog-style4.htm">- Blog Style 4</option>
+                                    <option value="blog-single.htm">- Blog Single</option>
+                                    <option value="page-contact.htm">Contact</option>
+                                </select>
+                            </div>
+                        </form>
 
-            </div>
+                    </div>*@
 
-        </div><!-- End Header -->
-        <!-- Blog Content
-        ================================================== -->
-        <div class="row">
-            <div class="span8 blog">
-                @RenderBody()
+            </div><!-- End Header -->
+            <!-- Blog Content
+            ================================================== -->
+            <div class="row">
+                <div class="span8 blog">
+                    @RenderBody()
 
-                @if (Page.ShowPaging != null)
-                {
-                    <div class="pagination">
-                        <ul>
+                    @if (Page.ShowPaging != null)
+                    {
+                        <div class="pagination">
+                            <ul>
 
-                            @if (Blog.CurrentPage > 1)
-                            {
-                                <li class="previous"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage - 1)" rel="prev">&larr; Newer</a></li>
-                            }
-
-                            @{
-                            var a = (double)Blog.GetPosts().Count() / (double)Blog.PostsPerPage;
-                            int numPages = (int)Math.Floor(a);
-
-                            string activeClass = string.Empty;
-
-                            }
-
-
-                            @for (int i = 1; i <= numPages; i++)
-                            {
-                                if (i == Storage.GetAllPosts().IndexOf(Blog.CurrentPost) + 1)
+                                @if (Blog.CurrentPage > 1)
                                 {
-                                    activeClass = "class=\"active\"";
+                                    <li class="previous"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage - 1)" rel="prev">&larr; Newer</a></li>
                                 }
 
-                                <li @activeClass><a href="@Blog.GetPagingUrl2(i)">@i</a></li>
-                            }
-@if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
-{ 
-                            <li class="next"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage + 1)" rel="next">Older &rarr;</a></li>
-}
+                                @{
+                                var a = (double)Blog.GetPosts().Count() / (double)Blog.PostsPerPage;
+                                int numPages = (int)Math.Floor(a);
 
-                        </ul>
+                                string activeClass = string.Empty;
 
+                                }
 
 
-                    </div>
-                }
+                                @for (int i = 1; i <= numPages; i++)
+                                {
+                                    if (i == Storage.GetAllPosts().IndexOf(Blog.CurrentPost) + 1)
+                                    {
+                                        activeClass = "class=\"active\"";
+                                    }
+
+                                    <li @activeClass><a href="@Blog.GetPagingUrl2(i)">@i</a></li>
+                                }
+                                @if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
+                                {
+                                    <li class="next"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage + 1)" rel="next">Older &rarr;</a></li>
+                                }
+
+                            </ul>
 
 
-            </div>
 
-            <!-- Blog Sidebar
-            ================================================== -->
-
-            <aside role="complementary">
-                <div class="span4 sidebar">
-                    <!--Search-->
-                    <section>
-                        <div class="input-append">
-                            <form action="#">
-                                <input id="appendedInputButton" size="16" type="text" placeholder="Search"><button class="btn" type="button"><i class="icon-search"></i></button>
-                            </form>
                         </div>
-                    </section>
-                    <section>
-                        <!--Categories-->
-                        <h5 class="title-bg">Categories</h5>
-                        <ul class="post-category-list">
-                            @foreach (var cat in Blog.GetCategories())
-                            {
-                                <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())"><i class="icon-plus-sign"></i>@cat.Key (@cat.Value)</a></li>
+                    }
 
-                            }
-                        </ul>
-                    </section>
-                    <section>
-                        <!--Popular Posts-->
-                        <h5 class="title-bg">Popular Posts</h5>
-                        <ul class="popular-posts">
-                            <li>
-                                <a href="#"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"></a>
-                                <h6><a href="#">Lorem ipsum dolor sit amet consectetur adipiscing elit</a></h6>
-                                <em>Posted on 09/01/15</em>
-                            </li>
-                            <li>
-                                <a href="#"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"></a>
-                                <h6><a href="#">Nulla iaculis mattis lorem, quis gravida nunc iaculis</a></h6>
-                                <em>Posted on 09/01/15</em>
-                            <li>
-                                <a href="#"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"></a>
-                                <h6><a href="#">Vivamus tincidunt sem eu magna varius elementum maecenas felis</a></h6>
-                                <em>Posted on 09/01/15</em>
-                            </li>
-                        </ul>
-                    </section>
+
                 </div>
-            </aside>
-        </div>
 
+                <!-- Blog Sidebar
+                ================================================== -->
+
+                <aside role="complementary">
+                    <div class="span4 sidebar">
+                        <!--Search-->
+                        @*<section>
+                                <div class="input-append">
+                                    <form action="#">
+                                        <input id="appendedInputButton" size="16" type="text" placeholder="Search"><button class="btn" type="button"><i class="icon-search"></i></button>
+                                    </form>
+                                </div>
+                            </section>*@
+                        <section>
+                            <!--Categories-->
+                            <h5 class="title-bg">Categories</h5>
+                            <ul class="post-category-list">
+                                @foreach (var cat in Blog.GetCategories())
+                                {
+                                    if (!string.IsNullOrEmpty(cat.Key))
+                                    {
+                                        <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())"><i class="icon-tag"></i>@cat.Key (@cat.Value)</a></li>
+                                    }
+                                }
+                            </ul>
+                        </section>
+                        @*<section>
+                                Popular Posts
+                                <h5 class="title-bg">Popular Posts</h5>
+                                <ul class="popular-posts">
+                                    <li>
+                                        <a href="#"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"></a>
+                                        <h6><a href="#">Lorem ipsum dolor sit amet consectetur adipiscing elit</a></h6>
+                                        <em>Posted on 09/01/15</em>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"></a>
+                                        <h6><a href="#">Nulla iaculis mattis lorem, quis gravida nunc iaculis</a></h6>
+                                        <em>Posted on 09/01/15</em>
+                                    <li>
+                                        <a href="#"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"></a>
+                                        <h6><a href="#">Vivamus tincidunt sem eu magna varius elementum maecenas felis</a></h6>
+                                        <em>Posted on 09/01/15</em>
+                                    </li>
+                                </ul>
+                            </section>*@
+                    </div>
+                </aside>
+            </div>
+        </div>
     </div> <!-- End Container -->
     <!-- Footer Area
         ================================================== -->
@@ -241,85 +243,27 @@
         <div class="footer-container">
             <!-- Begin Footer -->
             <div class="container">
-                <div class="row footer-row">
-                    @*
-                        <div class="span3 footer-col">
-                            <h5>About Us</h5>
-                            <img src="img/piccolo-footer-logo.png" alt="Piccolo" /><br /><br />
-                            <address>
-                                <strong>Design Team</strong><br />
-                                123 Main St, Suite 500<br />
-                                New York, NY 12345<br />
-                            </address>
-                            <ul class="social-icons">
-                                <li><a href="#" class="social-icon facebook"></a></li>
-                                <li><a href="#" class="social-icon twitter"></a></li>
-                                <li><a href="#" class="social-icon dribble"></a></li>
-                                <li><a href="#" class="social-icon rss"></a></li>
-                                <li><a href="#" class="social-icon forrst"></a></li>
-                            </ul>
-                        </div>
-                        <div class="span3 footer-col">
-                            <h5>Latest Tweets</h5>
-                            <ul>
-                                <li><a href="#">@@room122</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li><a href="#">@@room122</a> In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Morbi blandit ultricies ultrices.</li>
-                                <li><a href="#">@@room122</a> Vivamus nec lectus sed orci molestie molestie. Etiam mattis neque eu orci rutrum aliquam.</li>
-                            </ul>
-                        </div>
-                        <div class="span3 footer-col">
-                            <h5>Latest Posts</h5>
-                            <ul class="post-list">
-                                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="#">Consectetur adipiscing elit est lacus gravida</a></li>
-                                <li><a href="#">Lectus sed orci molestie molestie etiam</a></li>
-                                <li><a href="#">Mattis consectetur adipiscing elit est lacus</a></li>
-                                <li><a href="#">Cras rutrum, massa non blandit convallis est</a></li>
-                            </ul>
-                        </div>
-                        <div class="span3 footer-col">
-                            <h5>Flickr Photos</h5>
-                            <ul class="img-feed">
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                                <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                            </ul>
-                        </div>*@
-                </div>
 
+                <div class="row footer-row">
+                      
+                </div>
                 <div class="row">
                     <!-- Begin Sub Footer -->
                     <div class="span12 footer-col footer-sub">
                         <div class="row no-margin">
                             <div class="span6">
-
-
-
-
-                                @if (!User.Identity.IsAuthenticated)
-                                {
-                                    <span class="pull-right">
-                                        <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="glyphicon glyphicon-log-in"></i></a>
-                                    </span>
-                                }
                                 <span class="left" role="contentinfo" itemscope itemtype="http://schema.org/Person" itemprop="author">
                                     Copyright &copy; @DateTime.Now.Year
                                     <a href="http://jamesfuller.net" itemprop="url name">James Fuller</a>
                                 </span>
                             </div>
                             <div class="span6">
-                                <span class="right">
-                                    <a href="#">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">Gallery</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">Blog</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">Contact</a>
-                                </span>
+                                @if (!User.Identity.IsAuthenticated)
+                                    {
+                                    <span class="pull-right">
+                                        <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="glyphicon glyphicon-log-in"></i></a>
+                                    </span>
+                                    }
                             </div>
                         </div>
                     </div>

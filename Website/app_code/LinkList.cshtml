@@ -1,13 +1,17 @@
-﻿@helper LinkListDisplay(string[] list) {
+﻿@helper LinkListDisplay(string[] sa) {
     // your helper can contain code and/or markup, e.g.
     // var msg = "Hello " + name;
     // <p>@msg</p>
     // For more information, visit http://go.microsoft.com/fwlink/?LinkID=204658
 
-    if (list.Length > 0)
+    
+    var list =  sa.ToList<string>();
+    list.RemoveAll(x=> string.IsNullOrEmpty(x));
+    
+    if (list.Any())
     {
         <i class="icon-tags"></i>    
-        var j = string.Join(", ", list.ToList<string>().Select(x => SingleLink(x)));
+        var j = string.Join(", ", list.Select(x => SingleLink(x)));
         
         
         @Html.Raw(j)

@@ -535,7 +535,7 @@ ul.post-data li:last-child {padding-right: 0px;}
 .sidebar ul.post-category-list li:first-child,
 .sidebar .tab-content .tab-pane ul li:first-child{ padding-top: 0px; }
 .sidebar ul.post-category-list li:last-child { padding-bottom: 0px; border-bottom:none; }
-.sidebar ul.post-category-list li i {padding-right: 5px; background-position: 0 -95px;}
+/*.sidebar ul.post-category-list li i {padding-right: 5px; background-position: 0 -95px;}*/
 .sidebar .tab-content .tab-pane ul li i {padding-right: 5px;}
 
 .popular-posts{ margin: 0px;}
@@ -564,7 +564,6 @@ p.side {margin-bottom: 20px;}
 @media (min-width: 980px) and (max-width: 1199px) {
 	iframe {width:300px;}
 }
-
 
 /**************************************
 / Footer

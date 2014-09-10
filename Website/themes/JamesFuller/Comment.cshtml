@@ -1,29 +1,101 @@
 ﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "self" : null)">
     <img src="@Model.GravatarUrl(50)" width="50" height="50" alt="Comment by @Model.Author" />
-    <div>
-        @Date()
-        <p itemprop="commentText">@Html.Raw(Model.ContentWithLinks())</p>
-        @Author()
-        @DeleteAndApproveButton()
-    </div>
+    @Author()
+    @Date()
+        <div class="comment-content" itemprop="commentText">@Html.Raw(Model.ContentWithLinks())</div>    
+    @DeleteAndApproveButton()
     @ApprovalMessage()
 </article>
+
+@*<!-- Post Comments
+================================================== -->
+<section class="comments">
+    <h4 class="title-bg"><a name="comments"></a>5 Comments so far</h4>
+    <ul>
+        <li>
+            <img src="img/user-avatar.jpg" alt="Image" />
+            <span class="comment-name">John Doe</span>
+            <span class="comment-date">March 15, 2015 | <a href="#">Reply</a></span>
+            <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, ligula quis sagittis euismod, odio ante molestie tortor, eget ullamcorper lacus nunc a ligula. Donec est lacus, aliquet in interdum id, rutrum ac tellus. Ut rutrum, justo et lobortis commodo, est metus ornare tortor, vitae luctus turpis leo sed magna. In leo dolor, suscipit non mattis in.</div>
+            <!-- Reply -->
+            <ul>
+                <li>
+                    <img src="img/user-avatar.jpg" alt="Image" />
+                    <span class="comment-name">Jason Doe</span>
+                    <span class="comment-date">March 15, 2015 | <a href="#">Reply</a></span>
+                    <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, ligula quis sagittis euismod, odio ante molestie tortor, eget ullamcorper lacus nunc a ligula. Donec est lacus, aliquet in interdum id, rutrum ac tellus. Ut rutrum, justo et lobortis commodo, est metus ornare tortor, vitae luctus turpis leo sed magna. In leo dolor, suscipit non mattis in.</div>
+                </li>
+                <li>
+                    <img src="img/user-avatar.jpg" alt="Image" />
+                    <span class="comment-name">Jason Doe</span>
+                    <span class="comment-date">March 15, 2015 | <a href="#">Reply</a></span>
+                    <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, ligula quis sagittis euismod, odio ante molestie tortor, eget ullamcorper lacus nunc a ligula. Donec est lacus, aliquet in interdum id, rutrum ac tellus. Ut rutrum, justo et lobortis commodo, est metus ornare tortor, vitae luctus turpis leo sed magna. In leo dolor, suscipit non mattis in.</div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <img src="img/user-avatar.jpg" alt="Image" />
+            <span class="comment-name">John Doe</span>
+            <span class="comment-date">March 15, 2015 | <a href="#">Reply</a></span>
+            <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, ligula quis sagittis euismod, odio ante molestie tortor, eget ullamcorper lacus nunc a ligula. Donec est lacus, aliquet in interdum id, rutrum ac tellus. Ut rutrum, justo et lobortis commodo, est metus ornare tortor, vitae luctus turpis leo sed magna. In leo dolor, suscipit non mattis in.</div>
+        </li>
+        <li>
+            <img src="img/user-avatar.jpg" alt="Image" />
+            <span class="comment-name">John Doe</span>
+            <span class="comment-date">March 15, 2015 | <a href="#">Reply</a></span>
+            <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, ligula quis sagittis euismod, odio ante molestie tortor, eget ullamcorper lacus nunc a ligula. Donec est lacus, aliquet in interdum id, rutrum ac tellus. Ut rutrum, justo et lobortis commodo, est metus ornare tortor, vitae luctus turpis leo sed magna. In leo dolor, suscipit non mattis in.</div>
+        </li>
+
+    </ul>
+
+    <!-- Comment Form -->
+    <div class="comment-form-container">
+        <h6>Leave a Comment</h6>
+        <form action="#" id="comment-form">
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-user"></i></span>
+                <input class="span4" id="prependedInput" size="16" type="text" placeholder="Name">
+            </div>
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-envelope"></i></span>
+                <input class="span4" id="prependedInput" size="16" type="text" placeholder="Email Address">
+            </div>
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-globe"></i></span>
+                <input class="span4" id="prependedInput" size="16" type="text" placeholder="Website URL">
+            </div>
+            <textarea class="span6"></textarea>
+            <div class="row">
+                <div class="span2">
+                    <input type="submit" class="btn btn-inverse" value="Post My Comment">
+                </div>
+            </div>
+        </form>
+    </div>
+</section><!-- Close comments section-->*@
+
+
+
+
+
+
 
 @helper Date()
 {
     var title = Model.PubDate.ToString("yyyy-MM-ddTHH:mm");
-    var display = Model.PubDate.ToString("MMMM d. yyyy HH:mm");
-    <time datetime="@title" itemprop="commentTime">@display</time>
+    var display = Model.PubDate.ToString("dd MMMM yyyy HH:mm");
+     <span class="comment-date"><time datetime="@title" itemprop="commentTime">@display</time></span>
+     
 }
 @helper Author()
 {
     if (string.IsNullOrEmpty(Model.Website))
-    {
-        <strong itemprop="creator">@Model.Author</strong>
+    {  
+         <span class="comment-name" itemprop="creator">@Model.Author</span>
     }
     else
     {
-        <strong itemprop="creator"><a href="@Model.Website" itemprop="url" rel="nofollow">@Model.Author</a></strong>
+        <span class="comment-name" itemprop="creator"><a href="@Model.Website" itemprop="url" rel="nofollow">@Model.Author</a></span>
     }
 }
 @helper DeleteAndApproveButton()

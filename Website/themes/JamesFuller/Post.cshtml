@@ -5,30 +5,23 @@
         <h3 class="title-bg" itemprop="headline name"><a href="@Model.Url" itemprop="url">@Model.Title</a></h3>
     </header>
     <div class="post-summary">
+        @* TODO: Put hyperlink round this lot *@
         <div itemprop="articleBody">@Html.Raw(Model.GetHtmlContent())</div>
         <div class="post-summary-footer">
             <button class="btn btn-small btn-inverse" type="button">Read more</button>
             <ul class="post-data">
                 <li>
                     <i class="icon-calendar"></i>
-                    <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
+                    <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("dd MMMM yyyy")</abbr>
                 </li>
-                <li><i class="icon-user"></i> <a href="#">Admin</a></li>
-                <li><i class="icon-comment"></i> <a href="#">5 Comments</a></li>
+                @*<li><i class="icon-user"></i> <a href="#">Admin</a></li>*@
+                <li><i class="icon-comment"></i> <a href="@Model.Url#comments">@Model.CountApprovedComments(Context) Comments</a></li>
                 <li>
                     @LinkList.LinkListDisplay(Model.Categories)
                 </li>
             </ul>
         </div>
     </div>
-
-
-
-
-    @*<a href="@Model.Url#comments">
-            <em class="glyphicon glyphicon-comment"></em>
-            @Model.CountApprovedComments(Context) Comments
-        </a>*@
 
 
     @*@if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
@@ -45,24 +38,29 @@
 
     @if (Blog.CurrentPost != null)
     {
-        <section id="comments" aria-label="Comments">
+
+        <section id="comments" class="comments" aria-label="Comments">
+
+            <h4 class="title-bg"><a name="comments"></a>@Model.CountApprovedComments(Context) Comments so far</h4>
             @if (Model.CountApprovedComments(Context) > 0)
             {
-                <h2>Comments</h2>
-            }
-
-            @foreach (Comment comment in Model.Comments)
-            {
-                if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
-                {
-                    @RenderPage("Comment.cshtml", comment)
-                }
+                <ul>
+                    <li>
+                        @foreach (Comment comment in Model.Comments)
+                        {
+                            if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
+                            {
+                                @RenderPage("Comment.cshtml", comment)
+                            }
+                        }
+                    </li>
+                </ul>
             }
         </section>
 
-        if (Model.AreCommentsOpen(Context))
-        {
-            @RenderPage("~/views/CommentForm.cshtml")
-        }
-    }
+                if (Model.AreCommentsOpen(Context))
+                {
+        @RenderPage("~/views/CommentForm.cshtml")
+                }
+                }
 </article>
