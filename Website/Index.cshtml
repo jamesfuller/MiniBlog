@@ -1,11 +1,12 @@
 ﻿@using System.Web.Caching;
 @{
     Page.Title = Blog.Title;
+    Page.Description = Blog.Description;
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     DateTime lastModified = DateTime.MinValue;
 
-
-    if (Blog.CurrentSlug.Contains("jpg") || Blog.CurrentSlug.Contains("png"))
+    // a bit hacky - stop handling of images
+    if (Blog.CurrentSlug.Contains("jpg") || Blog.CurrentSlug.Contains("png") || Blog.CurrentSlug.Contains("addons"))
     {
         return;
     }
@@ -40,7 +41,7 @@
         if (post == null) { throw new HttpException(404, "Post not found"); }
 
         Page.Title = post.Title;
-        Page.Description = post.Excerpt;
+        Page.Description = post.SEODescription;  
         lastModified = post.LastModified;
 
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/" + post.ID + ".xml")));

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using CookComputing.XmlRpc;
+using HtmlAgilityPack;
 
 [XmlRpcMissingMapping(MappingAction.Ignore)]
 public class Post
@@ -39,6 +40,70 @@ public class Post
 
     [XmlRpcMember("description")]
     public string Content { get; set; }
+
+    private string seoDescription;
+    public string SEODescription
+    {
+        get
+        {
+            if (seoDescription == null)
+            {
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(this.Content);
+
+                HtmlNode n = doc.DocumentNode.SelectSingleNode(@"//meta[@itemprop='description']");
+                if (n != null)
+                {
+                    return n.GetAttributeValue("content", "");
+                }
+            }
+            return ConfigurationManager.AppSettings.Get("blog:description");
+        }
+        set { seoDescription = value; }
+    }
+    private string heroImageSrc;
+    public string HeroImageSrc
+    {
+        get
+        {
+            if (heroImageSrc == null)
+            {
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(this.Content);
+
+                HtmlNode n = doc.DocumentNode.SelectSingleNode(@"//img[@itemprop='image']");
+                if (n != null)
+                {
+                    return n.GetAttributeValue("src", "");
+                }
+            }
+            return ConfigurationManager.AppSettings.Get("blog:image");
+        }
+        set { heroImageSrc = value; }
+    }
+
+    private string heroImageAlt;
+    public string HeroImageAlt
+    {
+        get
+        {
+            if (heroImageAlt == null)
+            {
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(this.Content);
+
+                HtmlNode n = doc.DocumentNode.SelectSingleNode(@"//img[@itemprop='image']");
+                if (n != null)
+                {
+                    return n.GetAttributeValue("alt", "");
+                }
+            }
+            return string.Empty;
+        }
+        set { heroImageAlt = value; }
+    }
+
+
 
     [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
