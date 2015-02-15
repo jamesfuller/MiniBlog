@@ -7,7 +7,7 @@
 <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8" />
     <title>@Page.Title</title>
-    <meta name="description" content="@Blog.Description" />
+    <meta name="description" content="@Page.Description" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
     <link type="application/rsd+xml" rel="edituri" title="RSD" href="~/views/robots/rsd" />
@@ -15,6 +15,9 @@
     <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
 
     <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/style/site.css")" />
+    <link href="~/addons/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+    <link href="~/addons/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    
     <link rel="shortcut icon" href="@Blog.FingerPrint("/favicon.ico")" type="image/x-icon" />
     <link rel="dns-prefetch" href="http://gravatar.com/" />
 
@@ -49,13 +52,14 @@
             ================================================== -->
             <div class="span5 logo">
                 @*<a href="index.htm"><img src="img/piccolo-logo.png" alt="" /></a>*@
-                <h5>@Blog.Title - @Blog.Description</h5>
+                <h1 id="blog-title">@Blog.Title</h1>
+                <h5>@Blog.Description</h5>
             </div>
 
             <!-- Main Navigation
             ================================================== -->
             <div class="span7 navigation">
-                <div class="navbar hidden-phone">
+                @*<div class="navbar hidden-phone">
 
                     <ul class="nav">
                         <li class="dropdown">
@@ -99,11 +103,11 @@
                         <li><a href="page-contact.htm">Contact</a></li>
                     </ul>
 
-                </div>
+                </div>*@
 
-                @*Mobile Nav
-                        ==================================================
-                        <form action="#" id="mobile-nav" class="visible-phone">
+               @* <!---->Mobile Nav
+                        ================================================== *@
+                        @*<form action="#" id="mobile-nav" class="visible-phone">
                             <div class="mobile-nav-select">
                                 <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
                                     <option value="">Navigate...</option>
@@ -132,9 +136,9 @@
                                     <option value="page-contact.htm">Contact</option>
                                 </select>
                             </div>
-                        </form>
+                        </form>*@
 
-                    </div>*@
+                    </div>
 
             </div><!-- End Header -->
             <!-- Blog Content
@@ -235,7 +239,7 @@
                     </div>
                 </aside>
             </div>
-        </div>
+        
     </div> <!-- End Container -->
     <!-- Footer Area
         ================================================== -->
@@ -284,6 +288,18 @@
     {
         @RenderPage("~/views/AdminMenu.cshtml")
     }
+    <!-- Include required JS files -->
+    <script type="text/javascript" src="/addons/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    
+    <!--
+        At least one brush, here we choose JS. You need to include a brush for every
+        language you want to highlight
+    -->
+
+    <script type="text/javascript" src="~/addons/syntaxhighlighter_3.0.83/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript">
+    SyntaxHighlighter.all()
+    </script>
 
 </body>
 </html>

@@ -1,23 +1,26 @@
 ﻿
-
 <article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <header>
         <h3 class="title-bg" itemprop="headline name"><a href="@Model.Url" itemprop="url">@Model.Title</a></h3>
     </header>
     <div class="post-summary">
-        @* TODO: Put hyperlink round this lot *@
+        @* TODO: Put hyperlink round this lot, JF yes do this *@
         <div itemprop="articleBody">@Html.Raw(Model.GetHtmlContent())</div>
         <div class="post-summary-footer">
-            <button class="btn btn-small btn-inverse" type="button">Read more</button>
+            @*<button class="btn btn-small btn-inverse" type="button">Read more</button>*@
             <ul class="post-data">
                 <li>
                     <i class="icon-calendar"></i>
-                    <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("dd MMMM yyyy")</abbr>
+                    <time datetime="@Model.PubDate.ToString("yyyy-MM-dd")" itemprop="datepublished">
+                        @Model.PubDate.ToLocalTime().ToString("dd MMMM yyyy")
+                    </time>
                 </li>
-                @*<li><i class="icon-user"></i> <a href="#">Admin</a></li>*@
-                <li><i class="icon-comment"></i> <a href="@Model.Url#comments">@Model.CountApprovedComments(Context) Comments</a></li>
+                <li><i class="icon-user"></i><span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="http://jamesfuller.net" itemprop="name">James Fuller</a></span></li>
+                <li><i class="icon-comment"></i> <a href="@Model.Url#comments"><span itemprop="interactionCount "> @Model.CountApprovedComments(Context)</span> comments</a></li>
                 <li>
-                    @LinkList.LinkListDisplay(Model.Categories)
+                    <span itemprop="keywords">
+                        @LinkList.LinkListDisplay(Model.Categories)
+                    </span>
                 </li>
             </ul>
         </div>
@@ -58,9 +61,9 @@
             }
         </section>
 
-                if (Model.AreCommentsOpen(Context))
-                {
-        @RenderPage("~/views/CommentForm.cshtml")
-                }
-                }
+        if (Model.AreCommentsOpen(Context))
+        {
+            @RenderPage("~/views/CommentForm.cshtml")
+        }
+    }
 </article>

@@ -1,7 +1,7 @@
 ﻿@import 'oswald';
+@import 'wellfleet';
 @import 'bootstrap';
 @import 'bootstrap-responsive';
-
 
 @mixin heading-font {
     font-family: "Oswald", sans-serif;
@@ -21,6 +21,10 @@ h1, h2, h3, h4, h5, h6 {
     border-top: 1px dotted #a9a9a9;
 }
 $assetPath : "..";
+
+$primary-color: #d8450b;
+
+
 
 
 html, body {
@@ -91,7 +95,7 @@ h5.title-bg button {
 
 /***** Links *****/
 a, a:hover {
-    color: #d8450b;
+    color: $primary-color;
 }
 
 /***** Misc *****/
@@ -188,7 +192,7 @@ blockquote.pull-right {
 .navbar .nav > .active > a:hover,
 .navbar .nav > .active > a:focus {
     color: #FFF;
-    background-color: #d8450b;
+    background-color: $primary-color;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -204,7 +208,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 .navbar .nav li.dropdown.active > .dropdown-toggle,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     color: #FFF;
-    background-color: #d8450b;
+    background-color: $primary-color;
 }
 
 .dropdown-menu {
@@ -490,7 +494,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 }
 
 .project-details a:hover {
-    color: #d8450b;
+    color: $primary-color;
     text-decoration: none;
 }
 
@@ -539,11 +543,11 @@ a.item-details-link {
 }
 
 a.item-zoom-link:hover {
-    background: #d8450b url(#{$assetPath}/img/gallery-item-icons.png) no-repeat;
+    background: $primary-color url(#{$assetPath}/img/gallery-item-icons.png) no-repeat;
 }
 
 a.item-details-link:hover {
-    background: #d8450b url(#{$assetPath}/img/gallery-item-icons.png) no-repeat;
+    background: $primary-color url(#{$assetPath}/img/gallery-item-icons.png) no-repeat;
     background-position: -42px 0px;
 }
 
@@ -779,7 +783,7 @@ ul.post-data li:last-child {
 
 .blog-post-hover a:hover {
     text-decoration: none;
-    color: #d8450b;
+    color: $primary-color;
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
@@ -891,9 +895,9 @@ ul.post-data li:last-child {
     width: 80%;
 }
 
-.sidebar h5 {
+/*.sidebar h5 {
     margin-top: 40px;
-}
+}*/
 
 .sidebar ul.post-category-list,
 .sidebar .tab-content .tab-pane ul {
@@ -1004,7 +1008,7 @@ p.side {
 }
 
 .footer-col a:hover {
-    color: #d8450b;
+    color: $primary-color;
     text-decoration: none;
 }
 
@@ -1178,11 +1182,11 @@ a.accordion-toggle {
 }
 
 .color-bg {
-    background: #d8450b;
+    background: $primary-color;
 }
 
 .color {
-    color: #d8450b;
+    color: $primary-color;
 }
 
 .color-bar-1, .color-bar-2 {
@@ -1401,7 +1405,7 @@ a.accordion-toggle {
 
 
         li {
-            color: #D8450B;
+            color: $primary-color;
             font-family: "Oswald",sans-serif;
             font-size: 12px;
             font-weight: 400;
@@ -1411,7 +1415,7 @@ a.accordion-toggle {
             list-style-type: none;
             text-decoration: none;
             text-transform: uppercase;
-            -moz-text-decoration-color: #D8450B;
+            -moz-text-decoration-color: $primary-color;
             -moz-text-decoration-line: none;
             -moz-text-decoration-style: solid;
             line-height: 20px;
@@ -1544,4 +1548,9 @@ h2#cat-Blog, h1.widget-header, h2.widget-header, h3.widget-header, h4.widget-hea
         text-decoration: none;
         background: #f9f9f9 url(#{$assetPath}/img/page-bg-1.jpg);
     }
+}
+
+#blog-title{
+    font-family: 'Wellfleet', cursive;
+    text-transform: lowercase;
 }
