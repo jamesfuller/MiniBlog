@@ -1,0 +1,68 @@
+﻿
+<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <header>
+        <h3 class="title-bg" itemprop="headline name"><a href="@Model.Url" itemprop="url">@Model.Title</a></h3>
+    </header>
+    <div class="post-summary">
+        @* TODO: Put hyperlink round this lot, JF yes do this *@
+        <div itemprop="articleBody">@Html.Raw(Model.GetHtmlContent())</div>
+        <div class="post-summary-footer">
+            @*<button class="btn btn-small btn-inverse" type="button">Read more</button>*@
+            
+            <ul class="post-data">
+                <li>
+                    <i class="icon-calendar"></i>
+                    <time datetime="@Model.PubDate.ToString("yyyy-MM-dd")" itemprop="datepublished">
+                        @Model.PubDate.ToLocalTime().ToString("dd MMMM yyyy")
+                    </time>
+                </li>
+                <li><i class="icon-user"></i><span itemprop="author"><a href="http://jamesfuller.net">James Fuller</a></span></li>
+                <li><i class="icon-comment"></i> <a href="@Model.Url#comments">@Model.CountApprovedComments(Context) Comments</a></li>
+                <li>
+                    @LinkList.LinkListDisplay(Model.Categories)
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    @*@if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
+        {
+            <div id="excerpt" style="display:none;">
+                <h4>Excerpt:</h4>
+                <div itemprop="description">@Model.Excerpt</div>
+            </div>
+        }
+
+    *@
+
+
+
+    @if (Blog.CurrentPost != null)
+    {
+
+        <section id="comments" class="comments" aria-label="Comments">
+
+            <h4 class="title-bg"><a name="comments"></a>@Model.CountApprovedComments(Context) Comments so far</h4>
+            @if (Model.CountApprovedComments(Context) > 0)
+            {
+                <ul>
+                    <li>
+                        @foreach (Comment comment in Model.Comments)
+                        {
+                            if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
+                            {
+                                @RenderPage("Comment.cshtml", comment)
+                            }
+                        }
+                    </li>
+                </ul>
+            }
+        </section>
+
+        if (Model.AreCommentsOpen(Context))
+        {
+            @RenderPage("~/views/CommentForm.cshtml")
+        }
+    }
+</article>
