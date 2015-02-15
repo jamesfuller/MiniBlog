@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Blog post 5</title>
+  <slug>blog-post-5</slug>
+  <author></author>
+  <pubDate>2014-07-05 13:59:00</pubDate>
+  <lastModified>2015-01-18 15:57:24</lastModified>
+  <excerpt></excerpt>
+  <content>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. Vivamus tincidunt sem eu magna varius elementum. Maecenas felis tellus, fermentum vitae laoreet vitae, volutpat et urna. Nulla faucibus ligula eget ante varius ac euismod odio placerat. Nam sit amet felis non lorem faucibus rhoncus vitae id dui. Vivamus tincidunt sem eu magna varius elementum. Maecenas felis tellus, fermentum vitae laoreet vitae, volutpat et urna. Nulla faucibus ligula eget ante varius ac euismod odio placerat. Nam sit amet felis non lorem faucibus rhoncus vitae id dui.Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. Vivamus tincidunt sem eu magna varius elementum. Maecenas felis tellus, fermentum vitae laoreet vitae, volutpat et urna. Nulla faucibus ligula eget ante varius ac euismod odio placerat. Nam sit amet felis non lorem faucibus rhoncus vitae id dui.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>WLW</category>
+    <category>Chrome</category>
+    <category>James Category</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" isApproved="true" id="3962bbcd-0d48-484b-a9ef-76d2feee4eeb">
+      <author>aes Fuller top</author>
+      <email>james.fuller@top.com</email>
+      <website>http://www.bl.uk/</website>
+      <ip>::1</ip>
+      <userAgent>Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; ASU2JS; rv:11.0) like Gecko</userAgent>
+      <date>2015-01-18 15:57:24</date>
+      <content>dd</content>
+    </comment>
+  </comments>
+</post>

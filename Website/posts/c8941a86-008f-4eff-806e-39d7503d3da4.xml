@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>new post 1</title>
+  <slug>new-post-1</slug>
+  <author></author>
+  <pubDate>2014-09-20 23:36:37</pubDate>
+  <lastModified>2014-09-20 23:36:37</lastModified>
+  <excerpt></excerpt>
+  <content>&lt;a href="#"&gt;&lt;img alt="Post Thumb" src="http://wegraphics.net/demo/piccolo/img/gallery/post-img-1.jpg" itemprop="image"&gt;&lt;/a&gt;  &lt;meta content="i like cheese" itemprop="description"&gt; &lt;div class="post-body"&gt;   &lt;p&gt; here is some code i like &lt;/p&gt;  &lt;p&gt; here is some code i like &lt;/p&gt;  &lt;p&gt; here is some code i like &lt;/p&gt;  &lt;p&gt; here is some code i like &lt;/p&gt;  &lt;pre class="brush: csharp;"&gt;using System;
+using System.Collections.Generic;
+using System.ServiceModel.Syndication;
+using System.Web;
+using System.Xml;
+
+public class FeedHandler : IHttpHandler
+{
+    public void ProcessRequest(HttpContext context)
+    {
+        SyndicationFeed feed = new SyndicationFeed()
+        {
+            Title = new TextSyndicationContent(Blog.Title),
+            Description = new TextSyndicationContent("Latest blog posts"),
+            BaseUri = new Uri(context.Request.Url.Scheme + "://" + context.Request.Url.Authority),
+            Items = GetItems(),
+        };
+
+        feed.Links.Add(new SyndicationLink(feed.BaseUri));
+
+        using (var writer = new XmlTextWriter(context.Response.Output))
+        {
+            var formatter = GetFormatter(context, feed);
+            formatter.WriteTo(writer);
+        }
+
+        context.Response.ContentType = "text/xml";
+    }
+
+    private IEnumerable &amp;lt;syndicationitem&amp;gt; GetItems()
+    {
+        foreach (Post p in Blog.GetPosts(10))
+        {
+            var item = new SyndicationItem(
+			  p.Title
+			, p.Content
+			, p.AbsoluteUrl
+			, p.AbsoluteUrl.ToString()
+			, p.LastModified)
+                       {
+                           PublishDate = p.PubDate
+                       };
+
+            if (!string.IsNullOrWhiteSpace(p.Excerpt))
+                item.Summary = new TextSyndicationContent(p.Excerpt);
+            
+            item.Authors.Add(new SyndicationPerson("", p.Author, ""));
+            yield return item;
+        }
+    }
+
+    private SyndicationFeedFormatter GetFormatter(HttpContext context, SyndicationFeed feed)
+    {
+        string path = context.Request.Path.Trim('/');
+        int index = path.LastIndexOf('/');
+
+        if (index &amp;gt; -1 &amp;amp;&amp;amp; path.Substring(index + 1) == "atom")
+        {
+            context.Response.ContentType = "application/atom+xml";
+            return new Atom10FeedFormatter(feed);
+        }
+
+        context.Response.ContentType = "application/rss+xml";
+        return new Rss20FeedFormatter(feed);
+    }
+
+    public bool IsReusable
+    {
+        get { return false; }
+    }
+}
+
+
+&lt;/pre&gt;&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>James Category</category>
+    <category>hi</category>
+  </categories>
+  <comments></comments>
+</post>
