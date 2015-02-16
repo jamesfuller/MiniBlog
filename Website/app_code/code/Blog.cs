@@ -163,7 +163,7 @@ public static class Blog
     }
 
 
-    public static string GetPagingUrl2(int pageNumber)
+    public static string GetPagingUrlByPageNumber(int pageNumber)
     {
         string url = "/page/{0}/";
         string category = HttpContext.Current.Request.QueryString["category"];

@@ -154,7 +154,7 @@
 
                                 @if (Blog.CurrentPage > 1)
                                 {
-                                    <li class="previous"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage - 1)" rel="prev">&larr; Newer</a></li>
+                                    <li class="previous"><a href="@Blog.GetPagingUrlByPageNumber(Blog.CurrentPage - 1)" rel="prev">&larr; Newer</a></li>
                                 }
 
                                 @{
@@ -173,11 +173,11 @@
                                         activeClass = "class=\"active\"";
                                     }
 
-                                    <li @activeClass><a href="@Blog.GetPagingUrl2(i)">@i</a></li>
+                                    <li @activeClass><a href="@Blog.GetPagingUrlByPageNumber(i)">@i</a></li>
                                 }
                                 @if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
                                 {
-                                    <li class="next"><a href="@Blog.GetPagingUrl2(Blog.CurrentPage + 1)" rel="next">Older &rarr;</a></li>
+                                    <li class="next"><a href="@Blog.GetPagingUrlByPageNumber(Blog.CurrentPage + 1)" rel="next">Older &rarr;</a></li>
                                 }
 
                             </ul>
